@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmed</title>
+    <style>
+        body { background-color: #0d001a; color: #fff; font-family: 'Comic Sans MS', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; padding: 20px; box-sizing: border-box; }
+        .box { background: rgba(13, 0, 26, 0.9); padding: 50px; border-radius: 20px; border: 5px solid #00ff00; box-shadow: 0 0 30px #00ff00, 0 0 10px #ff00ff inset; max-width: 380px; transform: rotate(1deg); }
+        .alert { color: #ffcc00; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 20px; text-shadow: 0 0 10px #ffcc00; font-size: 1.1em; }
+        .id-display { font-size: 2.8em; font-weight: bold; background: #000; padding: 20px; border-radius: 12px; margin: 25px 0; letter-spacing: 5px; border: 3px solid #ff00ff; color: #fff; text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff; box-shadow: 5px 5px 0 #00ffff; }
+        p { color: #ccc; line-height: 1.6; text-shadow: 1px 1px 0 #000; }
+        h1 { color: #00ffff; text-transform: uppercase; font-size: 1.5em; text-shadow: 2px 2px 0 #ff00ff; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <span class="alert">📸 JETZT SCREENSHOT MACHEN!</span>
+        <h1>Request Received!</h1>
+        <p>Deine Referenz-ID:</p>
+        <div class="id-display" id="outID">....</div>
+        <p>Zuweisung wird verarbeitet.<br>Melde dich mit dem Screenshot.</p>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('outID').innerText = params.get('id') || "ERROR";
+    </script>
+</body>
+</html>
