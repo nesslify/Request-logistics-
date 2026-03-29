@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Request Portal v5.1</title>
+    <style>
+        :root { --accent: #ff00ff; --bg: #0d001a; --text: #fff; }
+        body { background-color: var(--bg); background-image: radial-gradient(circle, #2a004d, #0d001a); color: var(--text); font-family: 'Comic Sans MS', 'Courier New', sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; min-height: 100vh; box-sizing: border-box; }
+        .container { width: 100%; max-width: 420px; background: rgba(13, 0, 26, 0.9); padding: 30px; border-radius: 20px; border: 5px solid #ff00ff; box-shadow: 0 0 30px #ff00ff, 0 0 10px #00ffff inset; transform: rotate(-1deg); }
+        
+        /* Titel mit Kapsel-Sticker */
+        .title-group { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; transform: rotate(1deg); }
+        
+        h2 { text-align: center; color: #00ffff; text-transform: uppercase; letter-spacing: 3px; margin: 0; text-shadow: 3px 3px 0 #ff00ff, 0 0 10px #00ffff; font-size: 1.8em; }
+        
+        /* Die Pillen-Kapsel (Neon-Grafitti) */
+        .capsule-sticker { width: 45px; height: 25px; background: linear-gradient(to bottom, #ff00ff 50%, #00ffff 50%); border-radius: 20px; border: 3px solid #fff; box-shadow: 0 0 15px #00ffff, 3px 3px 0 #ffcc00; position: relative; transform: rotate(-15deg); flex-shrink: 0; }
+        
+        .product-grid { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .product-item { background: linear-gradient(135deg, #2a004d, #1a0033); padding: 20px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; border: 3px solid #ffcc00; box-shadow: 0 0 15px #ffcc00, 3px 3px 0 #ff00ff; transform: rotate(1deg); transition: 0.3s; }
+        .product-item:hover { transform: rotate(-1deg) scale(1.02); box-shadow: 0 0 25px #ffcc00; }
+        .product-info { font-weight: bold; font-size: 1.1em; color: #ffcc00; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .controls { display: flex; align-items: center; gap: 15px; }
+        .btn-step { background: #3498db; background-image: linear-gradient(to bottom right, #ff00ff, #3498db); color: #fff; border: 2px solid #fff; width: 40px; height: 40px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.4em; box-shadow: 3px 3px 0 #00ffff; text-shadow: 1px 1px 0 #000; }
+        .qty-val { font-size: 1.3em; width: 25px; text-align: center; color: #fff; font-weight: bold; text-shadow: 0 0 5px #ff00ff; }
+
+        label { display: block; margin-top: 20px; font-size: 0.8em; color: #ccc; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+        input { width: 100%; padding: 15px; margin-top: 5px; background: #1a0033; border: 3px solid #00ffff; border-radius: 10px; color: #fff; box-sizing: border-box; font-size: 16px; font-family: inherit; box-shadow: 3px 3px 0 #ff00ff; }
+        
+        #sendBtn { width: 100%; padding: 20px; background: #27ae60; background-image: linear-gradient(135deg, #27ae60, #ffcc00); color: #0d001a; border: 3px solid #fff; border-radius: 12px; font-weight: bold; margin-top: 35px; font-size: 1.3em; text-transform: uppercase; cursor: pointer; box-shadow: 4px 4px 0 #ff00ff; transition: 0.3s; font-family: inherit; letter-spacing: 1px; }
+        .footer { text-align: center; font-size: 0.7em; color: #777; margin-top: 30px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 0 5px #ff00ff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="title-group">
+        <div class="capsule-sticker"></div>
+        <h2>Request Portal</h2>
+    </div>
+    
+    <div class="product-grid">
+        <div class="product-item">
+            <span class="product-info">Weißer Quarz</span>
+            <div class="controls">
+                <button type="button" class="btn-step" onclick="change('q', -1)">-</button>
+                <span id="val-q" class="qty-val">0</span>
+                <button type="button" class="btn-step" onclick="change('q', 1)">+</button>
+            </div>
+        </div>
+        <div class="product-item" style="border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff, 3px 3px 0 #ffcc00; transform: rotate(-1.5deg);">
+            <span class="product-info" style="color: #ff00ff;">Silber Kristall</span>
+            <div class="controls">
+                <button type="button" class="btn-step" style="box-shadow: 3px 3px 0 #ffcc00;" onclick="change('s', -1)">-</button>
+                <span id="val-s" class="qty-val" style="text-shadow: 0 0 5px #00ffff;">0</span>
+                <button type="button" class="btn-step" style="box-shadow: 3px 3px 0 #ffcc00;" onclick="change('s', 1)">+</button>
+            </div>
+        </div>
+        <div class="product-item" style="border-color: #00ff00; box-shadow: 0 0 15px #00ff00, 3px 3px 0 #ff00ff; transform: rotate(1deg);">
+            <span class="product-info" style="color: #00ff00;">Grüner Stein</span>
+            <div class="controls">
+                <button type="button" class="btn-step" style="box-shadow: 3px 3px 0 #00ffff;" onclick="change('g', -1)">-</button>
+                <span id="val-g" class="qty-val" style="text-shadow: 0 0 5px #ffcc00;">0</span>
+                <button type="button" class="btn-step" style="box-shadow: 3px 3px 0 #00ffff;" onclick="change('g', 1)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <form action="https://api.web3forms.com/submit" method="POST" id="mainForm">
+        <input type="hidden" name="access_key" value="fb8d2bd4-4075-4805-8eab-079764a8c2dc">
+        <input type="hidden" name="Request_Details" id="hiddenDetails">
+        <input type="hidden" name="Anfrage_ID" id="hiddenID">
+        <input type="hidden" name="redirect" id="hiddenRedirect">
+
+        <label>Telegram / Signal ID / handy:</label>
+        <input type="text" name="Kontakt" required placeholder="@DeinName">
+
+        <label>Ort / Sektor:</label>
+        <input type="text" name="Ort" required placeholder="ort">
+
+        <label>email:</label>
+        <input type="text" name="Kontakt" required placeholder="@DeinName">
+        
+        <button type="submit" id="sendBtn">Send Request</button>
+    </form>
+    
+    <div class="footer">GRAFFITI MAKERS PROTOCOL v5.1 // ENCRYPTED</div>
+</div>
+
+<script>
+    let counts = { q: 0, s: 0, g: 0 };
+
+    function change(type, delta) {
+        counts[type] = Math.max(0, counts[type] + delta);
+        document.getElementById('val-' + type).innerText = counts[type];
+        updateHiddenFields();
+    }
+
+    function updateHiddenFields() {
+        let details = `Quarz: ${counts.q}, Silber: ${counts.s}, Gruen: ${counts.g}`;
+        document.getElementById('hiddenDetails').value = details;
+    }
+
+    window.onload = function() {
+        const num = Math.floor(1000 + Math.random() * 9000);
+        const letter = "ABCDEFGHJKLMNPQRSTUVWXYZ"[Math.floor(Math.random() * 24)];
+        const myID = num + "-" + letter;
+        
+        document.getElementById('hiddenID').value = myID;
+        
+        const baseUrl = "https://precious-mousse-edf5a3.netlify.app/success.html";
+        document.getElementById('hiddenRedirect').value = baseUrl + "?id=" + myID;
+    };
+</script>
+
+</body>
+</html>
